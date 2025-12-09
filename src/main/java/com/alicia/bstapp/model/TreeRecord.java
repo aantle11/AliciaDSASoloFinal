@@ -19,6 +19,10 @@ public class TreeRecord {
         this.treeJson = treeJson;
     }
 
+    public TreeRecord(String inputNumbers) {
+        this.inputNumbers = inputNumbers;
+    }
+
     // Getters & Setters
     public Long getId() {
         return id;
