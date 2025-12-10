@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Previous Trees</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- CSS will be applied later -->
+</head>
+
+<body>
+
+<h1>Previous Trees</h1>
+
+<div class="container">
+
+    <h2>All Previously Generated Trees</h2>
+
+    <p th:if="${trees.size() == 0}">
+        No previous trees found.
+    </p>
+
+    <div th:each="tree, iterStat : ${trees}">
+        <div class="tree-box">
+            <h3>Tree [[${iterStat.index}]]</h3>
+            <pre>[[${tree}]]</pre>
+        </div>
+        <br>
+    </div>
+
+    <br>
+
+    <form th:action="@{/enter-numbers}" method="get">
+        <button type="submit">Back to Input</button>
+    </form>
+
+</div>
+
+</body>
+</html>

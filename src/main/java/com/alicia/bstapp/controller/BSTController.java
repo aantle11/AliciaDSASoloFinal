@@ -3,6 +3,7 @@ package com.alicia.bstapp.controller;
 import com.alicia.bstapp.util.BSTBuilder;
 import com.alicia.bstapp.util.TreeNode;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
@@ -17,10 +18,11 @@ public class BSTController {
     }
 
     @PostMapping("/process-numbers")
-    @ResponseBody
-    public Map<String, Object> processNumbers(@RequestParam String numbers) {
+    public String processNumbers(@RequestParam String numbers, Model model) {
+
         String[] parts = numbers.split(",");
         BSTBuilder bst = new BSTBuilder();
+
         for (String part : parts) {
             try {
                 int num = Integer.parseInt(part.trim());
@@ -34,14 +36,14 @@ public class BSTController {
 
         previousTrees.add(treeJson);
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("tree", treeJson);
-        return response;
+        model.addAttribute("numbers", numbers);
+        model.addAttribute("treeJson", treeJson);
+        return "process-numbers";
     }
 
     @GetMapping("/previous-trees")
-    @ResponseBody
-    public List<String> getPreviousTrees() {
-        return previousTrees;
+    public String getPreviousTrees(Model model) {
+        model.addAttribute("trees", previousTrees);
+        return "previous-trees";
     }
 }

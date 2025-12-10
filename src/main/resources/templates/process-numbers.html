@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tree Result</title>
+
+    <style>
+        .json-box {
+            border: 1px solid #ccc;
+            padding: 15px;
+            white-space: pre-wrap;
+            background: #f5f5f5;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Binary Search Tree Created</h1>
+
+<p><strong>Input Numbers:</strong></p>
+<p th:text="${numbers}"></p>
+
+<h3>Tree JSON Output:</h3>
+<div class="json-box" th:text="${treeJson}"></div>
+
+<br>
+
+<form th:action="@{/enter-numbers}" method="get">
+    <button type="submit">Back to Input</button>
+</form>
+
+<br>
+
+<form th:action="@{/previous-trees}" method="get">
+    <button type="submit">Show Previous Trees</button>
+</form>
+
+</body>
+</html>
