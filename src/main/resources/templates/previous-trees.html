@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Previous Trees</title>
-    <link rel="stylesheet" href="/styles.css"> <!-- CSS will be applied later -->
 </head>
 
 <body>
@@ -18,10 +17,15 @@
         No previous trees found.
     </p>
 
-    <div th:each="tree, iterStat : ${trees}">
+    <!-- Loop through TreeRecord objects -->
+    <div th:each="record, iterStat : ${trees}">
         <div class="tree-box">
             <h3>Tree [[${iterStat.index}]]</h3>
-            <pre>[[${tree}]]</pre>
+
+            <p><strong>Input Numbers:</strong> [[${record.inputNumbers}]]</p>
+
+            <p><strong>Tree JSON:</strong></p>
+            <pre>[[${record.treeJson}]]</pre>
         </div>
         <br>
     </div>

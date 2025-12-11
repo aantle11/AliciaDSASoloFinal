@@ -3,13 +3,17 @@ package com.alicia.bstapp.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "tree_records")
 public class TreeRecord {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String inputNumbers;
+
     @Lob
+    @Column(columnDefinition = "TEXT")
     private String treeJson;
 
     public TreeRecord() {}

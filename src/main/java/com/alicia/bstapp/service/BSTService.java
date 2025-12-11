@@ -3,12 +3,11 @@ package com.alicia.bstapp.service;
 import com.alicia.bstapp.model.TreeRecord;
 import com.alicia.bstapp.repository.TreeRecordRepository;
 import com.alicia.bstapp.util.BSTBuilder;
-import com.alicia.bstapp.util.TreeNode;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class BSTService {
+
     private final TreeRecordRepository repository;
 
     public BSTService(TreeRecordRepository repository) {
@@ -25,7 +24,9 @@ public class BSTService {
             builder.insert(num);
         }
 
-        TreeRecord record = new TreeRecord(numberInput);
+        String treeJson = builder.toJson();
+
+        TreeRecord record = new TreeRecord(numberInput, treeJson);
         repository.save(record);
 
         return builder;

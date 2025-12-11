@@ -1,16 +1,22 @@
 package com.alicia.bstapp.controller;
 
+import com.alicia.bstapp.model.TreeRecord;
+import com.alicia.bstapp.repository.TreeRecordRepository;
 import com.alicia.bstapp.util.BSTBuilder;
-import com.alicia.bstapp.util.TreeNode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
+
+import java.util.List;
 
 @Controller
 public class BSTController {
 
-    private List<String> previousTrees = new ArrayList<>();
+    private final TreeRecordRepository repository;
+
+    public BSTController(TreeRecordRepository repository) {
+        this.repository = repository;
+    }
 
     @GetMapping("/enter-numbers")
     public String enterNumbersPage() {
@@ -28,22 +34,26 @@ public class BSTController {
                 int num = Integer.parseInt(part.trim());
                 bst.insert(num);
             } catch (NumberFormatException e) {
-                // ignore invalid numbers
+                // ignore invalid entry
             }
         }
 
         String treeJson = bst.toJson();
 
-        previousTrees.add(treeJson);
+        TreeRecord record = new TreeRecord(numbers, treeJson);
+        repository.save(record);
 
         model.addAttribute("numbers", numbers);
         model.addAttribute("treeJson", treeJson);
+
         return "process-numbers";
     }
 
     @GetMapping("/previous-trees")
     public String getPreviousTrees(Model model) {
-        model.addAttribute("trees", previousTrees);
+        List<TreeRecord> trees = repository.findAll();
+
+        model.addAttribute("trees", trees);
         return "previous-trees";
     }
 }
