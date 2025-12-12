@@ -1,40 +1,45 @@
 package com.alicia.bstapp;
 
 import com.alicia.bstapp.controller.BSTController;
-import com.alicia.bstapp.service.BSTService;
+import com.alicia.bstapp.model.TreeRecord;
 import com.alicia.bstapp.repository.TreeRecordRepository;
-
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.ui.Model;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@WebMvcTest(BSTController.class)
 public class BSTControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+    @Mock
+    private TreeRecordRepository repository;
 
-    @MockBean
-    private BSTService bstService;
+    @Mock
+    private Model model;
 
-    @MockBean
-    private TreeRecordRepository treeRecordRepository;
+    @InjectMocks
+    private BSTController controller;
+
+    public BSTControllerTest() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
-    public void testProcessNumbersRoute() throws Exception {
-        mockMvc.perform(post("/process-numbers")
-                        .param("numbers", "5,2,8"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("process-numbers"))
-                .andExpect(model().attributeExists("numbers"))
-                .andExpect(model().attributeExists("treeJson"));
+    public void testProcessNumbersRoute() {
 
-        verify(bstService, atLeastOnce()).buildTree("5,2,8");
+        String input = "5,2,8";
+
+        String result = controller.processNumbers(input, model);
+
+        verify(repository).save(any(TreeRecord.class));
+
+        verify(model).addAttribute("numbers", input);
+        verify(model).addAttribute(eq("treeJson"), any(String.class));
+
+        assertEquals("process-numbers", result);
     }
 }

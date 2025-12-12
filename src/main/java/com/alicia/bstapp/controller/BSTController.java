@@ -38,6 +38,8 @@ public class BSTController {
             }
         }
 
+        bst.balance();
+
         String treeJson = bst.toJson();
 
         TreeRecord record = new TreeRecord(numbers, treeJson);
