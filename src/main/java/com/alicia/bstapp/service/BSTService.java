@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BSTService {
-
     private final TreeRecordRepository repository;
 
     public BSTService(TreeRecordRepository repository) {
@@ -15,7 +14,6 @@ public class BSTService {
     }
 
     public BSTBuilder buildTree(String numberInput) {
-
         BSTBuilder builder = new BSTBuilder();
 
         String[] parts = numberInput.split(",");
@@ -24,11 +22,15 @@ public class BSTService {
             builder.insert(num);
         }
 
-        String treeJson = builder.toJson();
+        String json = builder.toJson();
 
-        TreeRecord record = new TreeRecord(numberInput, treeJson);
+        TreeRecord record = new TreeRecord(numberInput, json);
         repository.save(record);
 
         return builder;
+    }
+
+    public java.util.List<TreeRecord> getAllTrees() {
+        return repository.findAll();
     }
 }
