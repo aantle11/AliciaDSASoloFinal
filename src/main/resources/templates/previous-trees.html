@@ -7,13 +7,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f4f4f4;
+            background: #ffe6f0; /* light pink background */
+            color: #333;
             padding: 20px;
         }
 
-        h1 {
+        h1, h2, h3 {
+            color: #cc0066; /* deep pink headings */
             text-align: center;
-            margin-bottom: 30px;
         }
 
         .container {
@@ -21,21 +22,17 @@
             margin: 0 auto;
         }
 
-        .tree-box {
-            background: white;
+        .tree-box, .json-box {
+            background: #fff; /* white card background */
             padding: 20px;
             margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .tree-box h3 {
-            margin-top: 0;
-            color: #333;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            border: 2px solid #ff99cc; /* pink border */
         }
 
         pre {
-            background: #eee;
+            background: #ffe6f0; /* light pink background for JSON */
             padding: 15px;
             border-radius: 6px;
             white-space: pre-wrap;
@@ -43,7 +40,7 @@
         }
 
         button {
-            background: #4a6bff;
+            background: #ff66b2; /* bright pink button */
             border: none;
             padding: 10px 16px;
             color: white;
@@ -53,7 +50,7 @@
         }
 
         button:hover {
-            background: #2e4cd1;
+            background: #cc0066; /* darker pink on hover */
         }
 
         form {

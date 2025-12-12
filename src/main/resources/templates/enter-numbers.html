@@ -2,6 +2,51 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Enter Numbers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffe6f0; /* light pink background */
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #cc0066; /* deep pink heading */
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            color: #cc0066;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            border: 2px solid #ff99cc;
+            border-radius: 6px;
+            width: 250px;
+        }
+
+        button {
+            background: #ff66b2; /* bright pink button */
+            border: none;
+            padding: 10px 16px;
+            color: white;
+            font-size: 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #cc0066; /* darker pink on hover */
+        }
+
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
@@ -10,6 +55,7 @@
 <form action="/process-numbers" method="post">
     <label for="numbers">Enter numbers (comma-separated):</label>
     <input type="text" id="numbers" name="numbers" required>
+    <br>
     <button type="submit">Submit</button>
 </form>
 
